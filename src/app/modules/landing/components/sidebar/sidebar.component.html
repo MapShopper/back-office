@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="sidebar-items">
+    <div class="sidebar-item" *ngFor="let sidebarItem of sidebarList">
+      <div class="parent-item" *ngIf="sidebarItem.children?.length">
+        <div 
+          *ngIf="sidebarItem.active"
+          [@enterAnimation]="{ value: sidebarItem.isSelected ? '*' : 'void'}"
+          [class.selected]="sidebarItem.isSelected" [routerLink]="sidebarItem.route"
+          [queryParams]="{link:sidebarItem.route}">
+          {{sidebarItem.displayName}}> 
+        </div>
+        <div class="childs">
+          <div class="child">
+            <app-sidebar [parentInfo]="[sidebarItem]" [childInfo]="sidebarItem.children">
+            </app-sidebar>
+          </div>
+        </div>
+      </div>
+      <div class="single-item" *ngIf="!sidebarItem.children">
+        <div 
+          *ngIf="sidebarItem.active"
+          [@enterAnimation]="{ value:  sidebarItem.isSelected ? '*' : 'void'}"
+          [class.selected]="sidebarItem.isSelected"
+          [queryParams]="{link:sidebarItem.route}"
+          [routerLink]="parentInfo ? parentInfo[0].route + '/' + sidebarItem.route : sidebarItem.route">
+          {{sidebarItem.displayName}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

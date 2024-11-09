@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="sidebar">
+    <p-sidebar [(visible)]="showSidebar" position="right" (onHide)="showSidebar=!showSidebar">
+      <app-sidebar  [showSidebar]="showSidebar"></app-sidebar>
+    </p-sidebar>
+  </div>
+  <div class="button" (click)="showSidebar = !showSidebar">
+    <button>
+      show sidbar
+    </button>
+  </div>
+  <div class="view-container" [@slideFadeInOut]="animationsData" >
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
+</div>
